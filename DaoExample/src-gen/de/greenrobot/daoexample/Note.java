@@ -8,6 +8,7 @@ public class Note {
 
     private Long id;
     /** Not-null value. */
+    @javax.inject.Inject
     private String text;
     private String comment;
     private java.util.Date date;

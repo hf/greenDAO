@@ -42,7 +42,7 @@ public class ExampleDaoGenerator {
     private static void addNote(Schema schema) {
         Entity note = schema.addEntity("Note");
         note.addIdProperty();
-        note.addStringProperty("text").notNull();
+        note.addStringProperty("text").notNull().annotation("javax.inject.Inject");
         note.addStringProperty("comment");
         note.addDateProperty("date");
     }

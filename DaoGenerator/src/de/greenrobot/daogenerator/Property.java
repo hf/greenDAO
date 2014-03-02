@@ -17,6 +17,11 @@
  */
 package de.greenrobot.daogenerator;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
+
 /** Model class for an entity's property: a Java property mapped to a data base column. */
 public class Property {
 
@@ -102,6 +107,18 @@ public class Property {
             return this;
         }
 
+        public PropertyBuilder annotation(String annotation) {
+            property.annotations.add(new Annotation(annotation));
+
+            return this;
+        }
+
+        public PropertyBuilder annotation(Annotation annotation) {
+            property.annotations.add(annotation);
+
+            return this;
+        }
+
         public Property getProperty() {
             return property;
         }
@@ -123,6 +140,8 @@ public class Property {
     private boolean unique;
     private boolean notNull;
 
+    private Set<Annotation> annotations;
+
     /** Initialized in 2nd pass */
     private String constraints;
 
@@ -135,6 +154,7 @@ public class Property {
         this.entity = entity;
         this.propertyName = propertyName;
         this.propertyType = propertyType;
+        this.annotations = new HashSet<Annotation>();
     }
 
     public String getPropertyName() {
@@ -191,6 +211,16 @@ public class Property {
 
     public Entity getEntity() {
         return entity;
+    }
+
+    public Set<Annotation> getAnnotations() {
+
+        return annotations;
+    }
+
+    public void setAnnotations(Set<Annotation> annotations) {
+
+        this.annotations = annotations;
     }
 
     void init2ndPass() {
